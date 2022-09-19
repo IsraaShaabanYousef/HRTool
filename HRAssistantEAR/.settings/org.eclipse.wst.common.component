@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="HRAssistantEAR">
+        <wb-resource deploy-path="/" source-path="/" tag="defaultRootSource"/>
+        <dependent-module archiveName="HRAssistantWeb.war" deploy-path="/" handle="module:/resource/HRAssistantWeb/HRAssistantWeb">
+            <dependent-object>Module_1663441515746</dependent-object>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HRAssistantDataModel.jar" deploy-path="/" handle="module:/resource/HRAssistantDataModel/HRAssistantDataModel">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="HRAssistantEJB.jar" deploy-path="/" handle="module:/resource/HRAssistantEJB/HRAssistantEJB">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
