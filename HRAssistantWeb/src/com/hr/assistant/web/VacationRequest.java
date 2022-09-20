@@ -22,6 +22,9 @@ public class VacationRequest extends HttpServlet {
 
 	private VacationRqControlRemote vacationRqControlRemote;
 	public static final String EJB_JNDI_NAME = "ejb/VacationRqControl";
+	public static final int TOTAL_ANNUAL_VACATIONS = 21;
+	public static final int TOTAL_SICK_VACATIONS = 12;
+
 
 	public VacationRequest() {
 		super();
@@ -40,12 +43,13 @@ public class VacationRequest extends HttpServlet {
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String empId = request.getParameter("empId");
+		String vacationType = request.getParameter("vacationType");
 		EmployeeVacationTO employeeVacationTO = new EmployeeVacationTO();
-		employeeVacationTO.setVacationType(request.getParameter("vacationType"));
-
+		employeeVacationTO.setVacationType(vacationType);
+		employeeVacationTO.setEmployeeId(empId);
 		String startDateStr = request.getParameter("startDate");
 		String endDateStr = request.getParameter("endDate");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,15 +74,16 @@ public class VacationRequest extends HttpServlet {
 				+ "  height: 150px;\r\n" + "  margin: auto;\r\n" + "  width: 50%;\r\n" + "  text-align: center;\r\n"
 				+ "}\r\n" + "table, th, td {\r\n" + "  border: 1px solid black;\r\n" + "    margin: auto;\r\n"
 				+ "  width: 50%;\r\n" + "}\r\n"
-				+ "</style></head><body><form action=\"/HRAssistantWeb/VacationRequest\">\r\n" + "<div>"
+				+ "</style></head><body><form action=\"/HRAssistantWeb/VacationRequest\" method=\"POST\">\r\n"
+				+ "<div><label>Employee Card ID</label><input id=\"empId\" name=\"empId\" value=\"" + empId + "\"/>"
 				+ "	<h3 align=\"left\">Select Vacation Type</h3>\r\n" + "	Type<select name=\"vacationType\">\r\n"
 				+ "    <option value=\"Annual\">Annual</option>\r\n" + "    <option value=\"Sick\">Sick</option>\r\n"
 				+ "  </select>\r\n" + "  </div>\r\n" + "  \r\n" + "  <div>\r\n"
-				+ "  	<h3 align=\"left\">Create Request Details</h3>\r\n"
+				+ "  <h3 align=\"left\">Create Request Details</h3>\r\n"
 				+ "   <label for=\"startDate\">Start Date</label>\r\n"
-				+ "  <input type=\"date\" id=\"startDate\" name=\"startDate\" >\r\n" + "  \r\n"
+				+ "  <input type=\"date\" id=\"startDate\" name=\"startDate\" value=\""+startDateStr+"\">"
 				+ "  <label for=\"endDate\">End Date</label>\r\n"
-				+ "  <input type=\"date\" id=\"endDate\" name=\"endDate\"><br/>\r\n" + "  \r\n"
+				+ "  <input type=\"date\" id=\"endDate\" name=\"endDate\" value=\""+endDateStr+"\"><br/>"
 				+ "  <label for=\"days\">Days</label>" + "  <input name=\"days\" value=\"" + workDays
 				+ "\" readonly></input><br/>\r\n" + "  <input type=\"submit\">\r\n" + "  \r\n" + "  </div><div>"
 				+ "  <h3 align=\"left\">Vacation Balance</h3>" + "  <table>\r\n" + "  <tr>\r\n"
@@ -115,19 +120,6 @@ public class VacationRequest extends HttpServlet {
 		return workDays;
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-//	protected void doPost(HttpServletRequest request,
-//			HttpServletResponse response) throws ServletException, IOException {
-//
-//		ServletOutputStream outputStream = response.getOutputStream();
-//
-//		vacationRqControlRemote.approveRequest();
-//
-//
-//		outputStream.print("The AML job is run for one time succesfully.");
-//	}
+
 
 }

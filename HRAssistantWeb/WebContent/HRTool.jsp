@@ -25,8 +25,9 @@ table, th, td {
 </style>
 </head>
 <body>
-	<form action="/HRAssistantWeb/VacationRequest">
+	<form action="/HRAssistantWeb/VacationRequest" method="POST">	
 <div>
+	<label>Employee Card ID</label><input id="empId" name="empId"/>
 	<h3 align="left">Select Vacation Type</h3>
 
 	Type
@@ -60,11 +61,11 @@ table, th, td {
   </tr>
   <tr>
     <td>Annual</td>
-    <td><output name="annualVacations"></output></td>
+    <td>21</td>
   </tr>
   <tr>
     <td>Sick</td>
-    <td><output name="sickVacations"></output></td>
+    <td>12</td>
   </tr>
 </table>
   

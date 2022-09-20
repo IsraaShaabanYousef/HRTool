@@ -3,19 +3,20 @@
  */
 package com.hr.assistant.datamodel;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Israa.Shaaban
  *
  */
-public class EmployeeVacationTO {
+public class EmployeeVacationTO implements Serializable{
 	private long id;
-	private String employeeID;
+	private String employeeId;
 	private String vacationType;
 	private Date startDate;
 	private Date endDate;
-	private Integer numOfDays;
+	private int numOfDays;
 	
 	public long getId() {
 		return id;
@@ -23,11 +24,12 @@ public class EmployeeVacationTO {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getEmployeeID() {
-		return employeeID;
+
+	public String getEmployeeId() {
+		return employeeId;
 	}
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -41,10 +43,10 @@ public class EmployeeVacationTO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Integer getNumOfDays() {
+	public int getNumOfDays() {
 		return numOfDays;
 	}
-	public void setNumOfDays(Integer numOfDays) {
+	public void setNumOfDays(int numOfDays) {
 		this.numOfDays = numOfDays;
 	}
 	public String getVacationType() {

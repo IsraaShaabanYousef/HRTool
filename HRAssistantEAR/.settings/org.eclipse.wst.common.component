@@ -11,5 +11,8 @@
         <dependent-module archiveName="HRAssistantEJB.jar" deploy-path="/" handle="module:/resource/HRAssistantEJB/HRAssistantEJB">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="HRAssistantJPA.jar" deploy-path="/" handle="module:/resource/HRAssistantJPA/HRAssistantJPA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
