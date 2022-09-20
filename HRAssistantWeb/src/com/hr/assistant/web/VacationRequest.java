@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hr.assistant.datamodel.EmployeeVacationTO;
+import com.hr.assistant.datamodel.VacationBalanceTO;
 import com.hr.assistant.ejb.clients.VacationRqControlRemote;
 
 public class VacationRequest extends HttpServlet {
@@ -24,7 +25,6 @@ public class VacationRequest extends HttpServlet {
 	public static final String EJB_JNDI_NAME = "ejb/VacationRqControl";
 	public static final int TOTAL_ANNUAL_VACATIONS = 21;
 	public static final int TOTAL_SICK_VACATIONS = 12;
-
 
 	public VacationRequest() {
 		super();
@@ -43,8 +43,7 @@ public class VacationRequest extends HttpServlet {
 		}
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String empId = request.getParameter("empId");
 		String vacationType = request.getParameter("vacationType");
 		EmployeeVacationTO employeeVacationTO = new EmployeeVacationTO();
@@ -65,7 +64,7 @@ public class VacationRequest extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		vacationRqControlRemote.approveRequest(employeeVacationTO);
+		VacationBalanceTO vacationBalanceTO = vacationRqControlRemote.approveRequest(employeeVacationTO);
 		response.setContentType("text/html");
 		ServletOutputStream outputStream = response.getOutputStream();
 		outputStream.print("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">"
@@ -81,16 +80,16 @@ public class VacationRequest extends HttpServlet {
 				+ "  </select>\r\n" + "  </div>\r\n" + "  \r\n" + "  <div>\r\n"
 				+ "  <h3 align=\"left\">Create Request Details</h3>\r\n"
 				+ "   <label for=\"startDate\">Start Date</label>\r\n"
-				+ "  <input type=\"date\" id=\"startDate\" name=\"startDate\" value=\""+startDateStr+"\">"
+				+ "  <input type=\"date\" id=\"startDate\" name=\"startDate\" value=\"" + startDateStr + "\">"
 				+ "  <label for=\"endDate\">End Date</label>\r\n"
-				+ "  <input type=\"date\" id=\"endDate\" name=\"endDate\" value=\""+endDateStr+"\"><br/>"
+				+ "  <input type=\"date\" id=\"endDate\" name=\"endDate\" value=\"" + endDateStr + "\"><br/>"
 				+ "  <label for=\"days\">Days</label>" + "  <input name=\"days\" value=\"" + workDays
 				+ "\" readonly></input><br/>\r\n" + "  <input type=\"submit\">\r\n" + "  \r\n" + "  </div><div>"
 				+ "  <h3 align=\"left\">Vacation Balance</h3>" + "  <table>\r\n" + "  <tr>\r\n"
 				+ "    <th>Type</th>\r\n" + "    <th>Balance</th>\r\n" + "  </tr>\r\n" + "  <tr>\r\n"
-				+ "    <td>Annual</td>\r\n" + "    <td><output name=\"annualVacations\"></output></td>\r\n"
-				+ "  </tr>\r\n" + "  <tr>\r\n" + "    <td>Sick</td>\r\n"
-				+ "    <td><output name=\"sickVacations\"></output></td>\r\n" + "  </tr>\r\n"
+				+ "    <td>Annual</td>\r\n" + "    <td>"+((vacationBalanceTO != null) ? (TOTAL_ANNUAL_VACATIONS -vacationBalanceTO.getAnnualBalance())+"": TOTAL_ANNUAL_VACATIONS+"")+"</td>\r\n"
+				+ "  </tr>\r\n" + "  <tr>\r\n" + "    <td>Sick</td>"
+				+ "    <td>"+((vacationBalanceTO != null) ? (TOTAL_SICK_VACATIONS -vacationBalanceTO.getSickBalance())+"": TOTAL_SICK_VACATIONS+"")+"</td> </tr>"
 				+ "</table></div></form></body></html>");
 
 	}
@@ -119,7 +118,5 @@ public class VacationRequest extends HttpServlet {
 
 		return workDays;
 	}
-
-
 
 }
