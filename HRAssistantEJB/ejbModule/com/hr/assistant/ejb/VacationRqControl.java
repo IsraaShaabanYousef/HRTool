@@ -44,7 +44,7 @@ public class VacationRqControl implements VacationRqControlLocal, VacationRqCont
 				vacationBalanceTO.setAnnualBalance(vacationCountByType.get("Annual"));
 			
 			if(vacationCountByType.get("Sick") !=null)
-				vacationBalanceTO.setAnnualBalance(vacationCountByType.get("Sick"));
+				vacationBalanceTO.setSickBalance(vacationCountByType.get("Sick"));
 		}
 		return vacationBalanceTO;
 	}

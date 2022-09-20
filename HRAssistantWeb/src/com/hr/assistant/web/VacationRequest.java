@@ -71,7 +71,7 @@ public class VacationRequest extends HttpServlet {
 				+ "<title>HR assistant</title><style>" + "div {\r\n" + "  border-radius: 25px;\r\n"
 				+ "  border: 2px solid black;\r\n" + "  padding: 20px;\r\n" + "  width: 200px;\r\n"
 				+ "  height: 150px;\r\n" + "  margin: auto;\r\n" + "  width: 50%;\r\n" + "  text-align: center;\r\n"
-				+ "}\r\n" + "table, th, td {\r\n" + "  border: 1px solid black;\r\n" + "    margin: auto;\r\n"
+				+ "}\r\n" + "table, th, td {\r\n" + "  border: 1px solid black;\r\n" + "    margin: auto;text-align: center;\r\n"
 				+ "  width: 50%;\r\n" + "}\r\n"
 				+ "</style></head><body><form action=\"/HRAssistantWeb/VacationRequest\" method=\"POST\">\r\n"
 				+ "<div><label>Employee Card ID</label><input id=\"empId\" name=\"empId\" value=\"" + empId + "\"/>"
@@ -107,14 +107,13 @@ public class VacationRequest extends HttpServlet {
 			startCal.setTime(endDate);
 			endCal.setTime(startDate);
 		}
-
-		do {
+		do{
 			startCal.add(Calendar.DAY_OF_MONTH, 1);
 			if (startCal.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY
 					&& startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
 				workDays++;
 			}
-		} while (startCal.getTimeInMillis() <= endCal.getTimeInMillis());
+		}while (startCal.getTimeInMillis() <= endCal.getTimeInMillis());
 
 		return workDays;
 	}
